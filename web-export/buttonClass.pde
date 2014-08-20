@@ -1,3 +1,39 @@
+//DECLARE VARIABLES HERE
+
+button myButton; //declare our button object.
+
+
+//-------------------------------------
+
+//SETUP RUNS ONCE
+
+void setup(){
+  size (400,400);
+  myButton = new button(); //Initialize our button object.
+}
+
+
+
+
+//-------------------------------------
+
+//DRAW RUNS REPEATEDLY
+
+void draw(){
+  
+//Call methods on our button object.
+
+//myButton.display(5, 10, 50, 25);  //this would draw a rectangle
+fill(255);
+myButton.display(5, 10, 50, 55, "words", 20); //this adds clickable text (x,y,w,h,text,textsize)
+myButton.update();
+
+if (myButton.pressed == true){
+  print ("pressed");
+}
+
+}
+
 
 //-------------------------------------
 
@@ -24,11 +60,12 @@ class button{
   
   
   boolean pressed = false;
+//  boolean rectButt = true;
+//  boolean textButt = false;
+//  boolean imageButt = false;
   
   button(){
     
-  //these can be used to set button width and heights relative to size
-  
   w1 = int(width/8);
   w2 = int(width/4); 
   w3 = int(width/2.66);
@@ -53,13 +90,13 @@ void display(int xpos_, int ypos_, int w_, int h_){
   fill(255);
   }
   else
-  {
-  stroke(0);
-  fill(0);
-  noFill();
-  }
+  {fill (0);
   
-
+  }
+ 
+  //rectMode(CENTER);
+  stroke(0);
+  noFill();
   
   xpos = xpos_;
   ypos = ypos_;
@@ -79,6 +116,14 @@ void display(int xpos_, int ypos_, int w_, int h_){
   
 void display(int xpos_, int ypos_, int w_, int h_, String txt_, int sz_){
   
+//if (pressed){
+//  fill(255);
+//  }
+//  else
+//  {fill (0);
+//  
+//  }  
+
 
 textSize(sz_);
 text(txt_, xpos_, ypos_);
@@ -96,12 +141,13 @@ text(txt_, xpos_, ypos_);
 
 void update(){
   
+  //(xpos+w - xpos) / 2
+  
   int xShift = int(xpos - ((xpos+w - xpos) / 2));
   int yShift = int(ypos - ((ypos+h - ypos) / 2));  
   
-    if (mouseX >= xShift && mouseX <= xShift+w &&    //this is some math weirdness to center the button
-      mouseY >= yShift && mouseY <= yShift+h && mousePressed) {//rectMode won't work, because the xpos and ypos need to actually move in order for the button to actually work.
-  
+    if (mouseX >= xShift && mouseX <= xShift+w && 
+      mouseY >= yShift && mouseY <= yShift+h && mousePressed) {
       pressed = true;
 
     }
@@ -113,4 +159,5 @@ void update(){
 }
 
 }
+
 
